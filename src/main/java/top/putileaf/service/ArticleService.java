@@ -13,4 +13,6 @@ public interface ArticleService {
 
     //修改
     void update(Article article);
+
+    PageBean<Article> listRead(Integer pageNum, Integer pageSize, Integer categoryId, String searchKeyword);
 }

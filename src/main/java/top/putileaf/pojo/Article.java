@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 public class Article {
     private Integer id;//主键ID
-    @NotEmpty @Pattern(regexp = "^\\S{1,10}$") private String title;//文章标题
+    @NotEmpty @Pattern(regexp = "^\\S{1,20}$") private String title;//文章标题
     @NotEmpty  private String content;//文章内容
     @NotEmpty @URL private String coverImg;//封面图像
     @State private String state;//发布状态 已发布|草稿

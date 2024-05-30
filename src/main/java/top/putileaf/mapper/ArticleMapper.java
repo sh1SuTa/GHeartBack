@@ -20,7 +20,7 @@ public interface ArticleMapper {
     List<Article> list(Integer userId, Integer categoryId, String state);
 
     //展示所有人的文章
-    List<Article> listAll(Integer categoryId,String state);
+    List<Article> listAll(Integer categoryId,String searchKeyword);
 
     //修改
     @Update("update article set title=#{title},content=#{content},cover_img=#{coverImg},state=#{state},category_id=#{categoryId},update_time=#{updateTime} where id=#{id}")

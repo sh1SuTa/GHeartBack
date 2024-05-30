@@ -28,6 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.add(article);
     }
 
+    //文章管理查询（只查询自己的文章）
     @Override
     public PageBean<Article> list(Integer pageNum, Integer pageSize, Integer categoryId, String state) {
 //        创建pageBean对象
@@ -39,16 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
         Map<String,Object> map = ThreadLocalUtil.get();
         Integer userId =(Integer) map.get("id");
 
-        //判断用户是否为成员
-        Integer vip = (Integer) map.get("vip");
-        if (vip ==1 ){
-            List<Article> articles = articleMapper.listAll(categoryId, state);
-            Page<Article> page = (Page<Article>) articles;
-            //把数据填充到pageBean对象
-            pb.setTotal(page.getTotal());
-            pb.setItems(page.getResult());
-            return pb;
-        }else {
+
             //调用mapper
             List<Article> as = articleMapper.list(userId,categoryId,state);
             Page<Article> p = (Page<Article>) as;
@@ -56,14 +48,31 @@ public class ArticleServiceImpl implements ArticleService {
             pb.setTotal(p.getTotal());
             pb.setItems(p.getResult());
             return pb;
-        }
 
-//TODO
     }
+
+    //TODO
+    //文章阅读查询
 
     @Override
     public void update(Article article) {
         article.setUpdateTime(LocalDateTime.now());
         articleMapper.update(article);
+    }
+
+    @Override
+    public PageBean<Article> listRead(Integer pageNum, Integer pageSize, Integer categoryId, String searchKeyword) {
+        //        创建pageBean对象
+        PageBean<Article> pb = new PageBean<>();
+        //开启分页查询
+        Page<Article> objects = PageHelper.startPage(pageNum, pageSize);
+
+        //调用mapper
+        List<Article> as = articleMapper.listAll(categoryId,searchKeyword);
+        Page<Article> p = (Page<Article>) as;
+        //把数据填充到pageBean对象
+        pb.setTotal(p.getTotal());
+        pb.setItems(p.getResult());
+        return pb;
     }
 }

@@ -24,8 +24,18 @@ public class ArticleController {
 
     @GetMapping
     public Result<PageBean<Article>> list(
-    Integer pageNum,Integer pageSize,@RequestParam(required = false) Integer categoryId, @RequestParam(required = false)String state){
+    Integer pageNum,Integer pageSize,@RequestParam(required = false) Integer categoryId, @RequestParam(required = false)String state
+    ){
         PageBean<Article> pb = articleService.list(pageNum,pageSize,categoryId,state);
+        return Result.success(pb);
+    }
+
+    //展示所有已发布文章
+    @GetMapping("/read")
+    public Result<PageBean<Article>> listRead(
+            Integer pageNum,Integer pageSize,@RequestParam(required = false) Integer categoryId, @RequestParam(required = false)String searchKeyword
+    ){
+        PageBean<Article> pb = articleService.listRead(pageNum,pageSize,categoryId,searchKeyword);
         return Result.success(pb);
     }
 
