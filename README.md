@@ -9,16 +9,16 @@
 软件架构说明
 
 
-#### 安装教程
+#### 如何部署
 
-1.  xxxx
-2.  xxxx
+1.  centos7.9或debian中安装java17，使用nohup java -jar big-en.jar & myOutLog.log  2>&1 &
+2.  请使用redis 5.0.9
 3.  xxxx
 
 #### 使用说明
 
 1.  Java版本17.0.10
-2.  xxxx
+2.  使用了mybaits-plus,mysql,springboot,springmvc,redis,ThreadLocal
 3.  xxxx
 
 #### 参与贡献

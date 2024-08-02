@@ -19,10 +19,13 @@ public interface ArticleMapper {
     //展示自己的文章
     List<Article> list(Integer userId, Integer categoryId, String state);
 
-    //展示所有人的文章
+    //展示所有人已发布的文章
     List<Article> listAll(Integer categoryId,String searchKeyword);
 
+
+
+
     //修改
-    @Update("update article set title=#{title},content=#{content},cover_img=#{coverImg},state=#{state},category_id=#{categoryId},update_time=#{updateTime} where id=#{id}")
+    @Update("update article set title=#{title},content=#{content0},cover_img=#{coverImg},state=#{state},category_id=#{categoryId},update_time=#{updateTime} where id=#{id}")
     void update(Article article);
 }

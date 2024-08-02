@@ -1,12 +1,9 @@
 package top.putileaf.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * ThreadLocal 工具类
  */
-@SuppressWarnings("all")
+//@SuppressWarnings("all")
 public class ThreadLocalUtil {
     //提供ThreadLocal对象,
     private static final ThreadLocal THREAD_LOCAL = new ThreadLocal();

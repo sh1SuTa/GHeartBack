@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         userMapper.updateAvatar(avatarUrl,id);
     }
 
-    //重置密码
+    //登录用户重置密码
     @Override
     public void updatePwd(String newPwd) {
         //先对密码进行加密
@@ -56,4 +56,14 @@ public class UserServiceImpl implements UserService {
         //传给mapper
         userMapper.updatePwd(md5String,id);
     }
+
+    //忘记密码重置
+    @Override
+    public void forgetPwd(String username, String newPwd) {
+        //获取用户id
+        User user = userMapper.findByUsername(username);
+        userMapper.updatePwd(Md5Util.getMD5String(newPwd),user.getId());
+    }
+
+
 }

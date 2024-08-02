@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import top.putileaf.pojo.Result;
 import top.putileaf.pojo.User;
+import top.putileaf.service.MailCodeService;
 import top.putileaf.service.UserService;
 import top.putileaf.utils.JwtUtil;
 import top.putileaf.utils.Md5Util;
@@ -30,6 +31,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired private StringRedisTemplate stringRedisTemplate;
+    @Autowired private MailCodeService mailCodeService;
     @PostMapping("/register")
     //判断是否符合用户名规则
     public Result register(@Pattern(regexp="^\\S{5,16}$")String username,@Pattern(regexp="^\\S{5,16}$")String password){
@@ -69,6 +71,7 @@ public class UserController {
         }
         return Result.error("密码错误");
     }
+
 
     //根据用户名查询用户
     @GetMapping("/userInfo")
@@ -126,10 +129,64 @@ public class UserController {
         //删除redis中的旧token
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
         operations.getOperations().delete(token);
-        return Result.success();
+        return Result.successT("修改成功");
     }
 
-    //判断用户是否会员
+    //忘记密码raw-json
+    // {
+    //    "username": "2903039102",
+    //    "code": "2075",
+    //    "newPwd": "123456"
+    //}
+    @PatchMapping("/forgetPwd")
+    public Result forgetPwd(@RequestBody Map<String,String> params){
+        String username = params.get("username");
+        if (!StringUtils.hasLength(username)){
+            return Result.error("请填写用户名");
+        }
+        if (!mailCodeService.checkCode(username,params.get("code"))){
+            return Result.error("验证码错误");
+        }
+        //获取要重置的密码
+        String newPwd = params.get("newPwd");
+        if (!StringUtils.hasLength(newPwd)){
+            return Result.error("请填写新密码");
+        }
+        //判断密码是否符合规则
+        if (!newPwd.matches("^\\S{5,16}$")){
+            return Result.error("密码长度必须在5-16位");
+        }
+        userService.forgetPwd(username,newPwd);
+        return Result.successT("重置密码成功");
+    }
+
+    //获取重置密码的验证码
+    @GetMapping("/getCode")
+    public Result getCode(@RequestParam("username") String username){
+        //判断验证码是否存在
+        if(mailCodeService.codeIsHave(username)){
+            return Result.error("验证码已发送，请稍后重试");
+        }
+        //判断用户名是否为空
+        if (!StringUtils.hasLength(username)){
+            return Result.error("请填写用户名");
+        }
+        //查询这个用户的邮箱
+        String userMail = userService.findByUsername(username).getEmail();
+        //如果邮箱为空
+        if (!StringUtils.hasLength(userMail)){
+            return Result.error("这个账号没有绑定邮箱，请联系管理员");
+        }
+        //发送邮件
+        mailCodeService.sendCodeMail(username, userMail);
+        return Result.successT("发送成功");
+    }
+
+
+
+
+
+
 
 
 }

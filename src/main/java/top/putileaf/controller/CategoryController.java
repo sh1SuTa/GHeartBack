@@ -20,7 +20,7 @@ public class CategoryController {
     @PostMapping
     public Result add(@RequestBody @Validated(Category.Add.class) Category category){
         categoryService.add(category);
-        return Result.success();
+        return Result.successT("操作成功");
     }
 
 
@@ -42,7 +42,7 @@ public class CategoryController {
     @PutMapping
     public Result update(@RequestBody @Validated(Category.Update.class) Category category){
         categoryService.update(category);
-        return Result.success();
+        return Result.successT("操作成功");
     }
 
 

@@ -22,8 +22,10 @@ public class ArticleController {
     }
 
 
+
     @GetMapping
     public Result<PageBean<Article>> list(
+            //@RequestParam 注解用于显式指定请求参数的名称以及是否为必需参数
     Integer pageNum,Integer pageSize,@RequestParam(required = false) Integer categoryId, @RequestParam(required = false)String state
     ){
         PageBean<Article> pb = articleService.list(pageNum,pageSize,categoryId,state);

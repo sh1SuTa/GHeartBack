@@ -20,13 +20,9 @@ public class Result<T> {
         return new Result<>(0, "操作成功", data);
     }
 
-    //快速返回操作成功响应结果
-    public static Result success() {
-        return new Result(0, "操作成功", null);
-    }
 
-    public static Result successT(String msg) {
-        return new Result(0, msg, null);
+    public static Result successT(String message) {
+        return new Result(0, message, null);
     }
 
     public static Result error(String message) {

@@ -7,6 +7,7 @@ import top.putileaf.pojo.Vpn;
 import top.putileaf.service.VpnService;
 import top.putileaf.utils.ThreadLocalUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +38,12 @@ public class VpnServiceImpl implements VpnService {
 
 
 
+    }
+//TODO
+    @Override
+    public List<String> pMail() {
+        List<String> pMailList = new ArrayList<>();
+        
+        return null;
     }
 }

@@ -9,6 +9,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 @Data
 public class Category {
+
     @NotNull(groups = Update.class) private Integer id;//主键ID
     @NotEmpty private String categoryName;//分类名称，添加非空校验
     @NotEmpty private String categoryAlias;//分类别名

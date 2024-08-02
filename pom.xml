@@ -49,54 +49,62 @@
       <dependency>
           <groupId>org.projectlombok</groupId>
           <artifactId>lombok</artifactId>
-
       </dependency>
+
 <!--validation依赖-->
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-validation</artifactId>
       </dependency>
+
 <!--jwt令牌依赖-->
       <dependency>
           <groupId>com.auth0</groupId>
           <artifactId>java-jwt</artifactId>
           <version>4.4.0</version>
       </dependency>
+
 <!--分页查询pageBean坐标-->
       <dependency>
           <groupId>com.github.pagehelper</groupId>
           <artifactId>pagehelper-spring-boot-starter</artifactId>
           <version>1.4.6</version>
       </dependency>
+
 <!--阿里云OSS依赖-->
       <dependency>
           <groupId>com.aliyun.oss</groupId>
           <artifactId>aliyun-sdk-oss</artifactId>
           <version>3.15.1</version>
       </dependency>
+
       <!--阿里云OSS依赖JAVA9以上额外-->
       <dependency>
           <groupId>javax.xml.bind</groupId>
           <artifactId>jaxb-api</artifactId>
           <version>2.3.1</version>
       </dependency>
-      <!--阿里云OSS依赖JAVA9以上额外-->
       <dependency>
           <groupId>javax.activation</groupId>
           <artifactId>activation</artifactId>
           <version>1.1.1</version>
       </dependency>
-      <!-- no more than 2.3.3-->
-      <!--阿里云OSS依赖JAVA9以上额外-->
+      <!--阿里云OSS依赖 no more than 2.3.3-->
       <dependency>
           <groupId>org.glassfish.jaxb</groupId>
           <artifactId>jaxb-runtime</artifactId>
           <version>2.3.3</version>
       </dependency>
+
 <!--      redis依赖-->
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-data-redis</artifactId>
+      </dependency>
+<!--      Javamail-->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-mail</artifactId>
       </dependency>
   </dependencies>
 
