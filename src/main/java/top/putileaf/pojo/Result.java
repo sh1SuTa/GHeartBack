@@ -21,11 +21,11 @@ public class Result<T> {
     }
 
 
-    public static Result successT(String message) {
-        return new Result(0, message, null);
+    public static Result<String> successT(String message) {
+        return new Result<>(0, message, null);
     }
 
-    public static Result error(String message) {
-        return new Result(1, message, null);
+    public static Result<String> error(String message) {
+        return new Result<>(1, message, null);
     }
 }

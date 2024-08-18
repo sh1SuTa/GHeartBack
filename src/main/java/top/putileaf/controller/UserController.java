@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import top.putileaf.pojo.Result;
 import top.putileaf.pojo.User;
 import top.putileaf.service.MailCodeService;
@@ -87,14 +88,14 @@ public class UserController {
     //更新
     @PutMapping("/update")
     //Validated让传入的参数进行对象变量校验
-    public Result update(@RequestBody @Validated User user){
+    public Result<String> update(@RequestBody @Validated User user){
         userService.update(user);
         return Result.successT("修改成功");
     }
 
     //修改头像
     @PatchMapping("/updateAvatar")
-    public Result updateAvatar(@RequestParam @URL String avatarUrl){
+    public Result<String> updateAvatar(@RequestParam @URL String avatarUrl){
         userService.updateAvatar(avatarUrl);
         return Result.successT("修改头像成功");
     }
@@ -102,7 +103,7 @@ public class UserController {
 
     //修改密码
     @PatchMapping("/updatePwd")
-    public Result updatePwd(@RequestBody Map<String,String> params,@RequestHeader("Authorization") String token){
+    public Result<String> updatePwd(@RequestBody Map<String,String> params,@RequestHeader("Authorization") String token){
         //校验参数
         String oldPwd = params.get("old_pwd");//旧密码
         String newPwd = params.get("new_pwd");//新密码
@@ -139,7 +140,7 @@ public class UserController {
     //    "newPwd": "123456"
     //}
     @PatchMapping("/forgetPwd")
-    public Result forgetPwd(@RequestBody Map<String,String> params){
+    public Result<String> forgetPwd(@RequestBody Map<String,String> params){
         String username = params.get("username");
         if (!StringUtils.hasLength(username)){
             return Result.error("请填写用户名");
@@ -162,7 +163,7 @@ public class UserController {
 
     //获取重置密码的验证码
     @GetMapping("/getCode")
-    public Result getCode(@RequestParam("username") String username){
+    public Result<String> getCode(@RequestParam("username") String username){
         //判断验证码是否存在
         if(mailCodeService.codeIsHave(username)){
             return Result.error("验证码已发送，请稍后重试");
