@@ -6,8 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import top.putileaf.pojo.Result;
 import top.putileaf.utils.AliOssUtil;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.UUID;
 
 @RestController

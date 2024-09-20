@@ -23,11 +23,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // 配置允许所有路径
-                .allowedOrigins("http://me.putileaf.top", "http://putileaf.top") // 允许特定的源
+                .allowedOrigins("http://me.putileaf.top", "http://putileaf.top","http://localhost:5173") // 允许特定的源
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH") // 允许的HTTP方法
                 .allowedHeaders("*") // 允许所有的头部
                 .allowCredentials(true) // 允许携带凭证
                 .maxAge(3600); // 预检请求的有效期，单位秒
+
     }
 
 }

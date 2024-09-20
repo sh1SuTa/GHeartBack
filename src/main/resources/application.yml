@@ -16,7 +16,7 @@ spring:
     #    password: VEYGOWIZVVZRTESC
     #    host: smtp.163.com
     username: putileaf@foxmail.com
-    password: fjlsnqqinrgrddbc
+    password: odlintbixkpvdgib
     host: smtp.qq.com
 
 #开启驼峰命名和下划线命名的自动转换
