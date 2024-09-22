@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://123.57.186.79:3306/big_event
+    url: jdbc:mysql://你的IP:3306/big_event
     username: root
-    password: Wjt18409438!
+    password: 你的密码
 #    password: 1234
 
   data:
@@ -12,11 +12,9 @@ spring:
       port: 6379
 
   mail:
-    #    username: 18872903225@163.com
-    #    password: VEYGOWIZVVZRTESC
-    #    host: smtp.163.com
+ 
     username: putileaf@foxmail.com
-    password: odlintbixkpvdgib
+    password: 你的密码
     host: smtp.qq.com
 
 #开启驼峰命名和下划线命名的自动转换
