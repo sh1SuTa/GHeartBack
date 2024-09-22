@@ -23,18 +23,18 @@ public class MailCodeServiceImpl implements MailCodeService {
 
     @Override
     //判断验证码是否存在redis中
-    public boolean codeIsHave(String username) {
-        return Boolean.TRUE.equals(stringRedisTemplate.hasKey(username));
+    public boolean codeIsHave(String email) {
+        return Boolean.TRUE.equals(stringRedisTemplate.hasKey(email));
     }
     @Override
     public void sendCodeMail(String username, String email) {
-
         //生成一个四位数验证码
         String code = MailSendCode.getCode();
-
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
         //将验证码存入redis，设置验证码有效期五分钟
         operations.set(username,code,5, TimeUnit.MINUTES);
+        //设置验证码发送冷却60秒
+        operations.set(email,code,50, TimeUnit.SECONDS);
 
         SimpleMailMessage mail = new SimpleMailMessage();
         //设置邮件标题
@@ -59,9 +59,7 @@ public class MailCodeServiceImpl implements MailCodeService {
     public boolean checkCode(String username, String code) {
         if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(username))){
             String redisCode = stringRedisTemplate.opsForValue().get(username);
-
             if (redisCode != null && redisCode.equals(code)){
-
                 stringRedisTemplate.delete(username);
                 return true;
             }

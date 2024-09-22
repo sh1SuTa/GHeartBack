@@ -27,11 +27,7 @@ public class VpnController {
 
     }
 
-    @GetMapping("/pMail")
-    public Result pMail(){
 
-        return Result.success(vpnService.pMail());
-    }
 
 
 

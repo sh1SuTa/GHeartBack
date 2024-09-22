@@ -32,18 +32,17 @@ public class VpnServiceImpl implements VpnService {
         }else {
             return null;
         }
-
-
-
-
-
-
     }
-//TODO
-    @Override
-    public List<String> pMail() {
-        List<String> pMailList = new ArrayList<>();
-        
-        return null;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

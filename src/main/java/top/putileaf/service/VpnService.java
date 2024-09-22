@@ -10,5 +10,5 @@ public interface VpnService {
     List<Vpn> list();
 
 
-    Object pMail();
+
 }

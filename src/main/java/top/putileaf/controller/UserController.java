@@ -164,16 +164,17 @@ public class UserController {
     //获取重置密码的验证码
     @GetMapping("/getCode")
     public Result<String> getCode(@RequestParam("username") String username){
-        //判断验证码是否存在
-        if(mailCodeService.codeIsHave(username)){
-            return Result.error("验证码已发送，请稍后重试");
+        //查询这个用户的邮箱
+        String userMail = userService.findByUsername(username).getEmail();
+        //判断验证码是否超过60秒
+        if(mailCodeService.codeIsHave(userMail)){
+            return Result.error("验证码不可以重复发送，请稍后重试");
         }
         //判断用户名是否为空
         if (!StringUtils.hasLength(username)){
             return Result.error("请填写用户名");
         }
-        //查询这个用户的邮箱
-        String userMail = userService.findByUsername(username).getEmail();
+
         //如果邮箱为空
         if (!StringUtils.hasLength(userMail)){
             return Result.error("这个账号没有绑定邮箱，请联系管理员");
